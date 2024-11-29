@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sound and Silence</title>
+
+<!-- HTML Meta Tags -->
+<title>|SOUND AND SILENCE|</title>
+<meta name="description" content="|SOUND AND SILENCE| is a touring exhibition that will take place at three galleries across England in 2025. The exhibition brings together four sculptors and bell makers who explore the function and fabrication of bells in different ways. The exhibition will feature sonic sculptures, installations, performances, workshops and live bronze casting - shining a light on the history, making processes, contemporary position and sculptural nature of bells. Alongside the exhibition we will produce a radio documentary about the project.">
+
+<!-- Facebook Meta Tags -->
+<!-- <meta property="og:url" content="https://soundofspace.group"> -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="SOUND AND SILENCE">
+<meta property="og:description" content="|SOUND AND SILENCE| is a touring exhibition that will take place at three galleries across England in 2025. The exhibition brings together four sculptors and bell makers who explore the function and fabrication of bells in different ways. The exhibition will feature sonic sculptures, installations, performances, workshops and live bronze casting - shining a light on the history, making processes, contemporary position and sculptural nature of bells. Alongside the exhibition we will produce a radio documentary about the project.">
+<!-- <meta property="og:image" content="https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/soundofspace.group/%7CSOUND%20OF%20SPACE%7C/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2Fec88ac02-c727-4f60-bf5a-a63eec08bf9e.jpg%3Ftoken%3DwU-Ot_zvFqmyQ7_XYOZ94U2uDXKwYsHk9l7HI6NRGnk%26height%3D600%26width%3D1200%26expires%3D33256529538/og.png"> -->
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<!-- <meta property="twitter:domain" content="soundofspace.group"> -->
+<!-- <meta property="twitter:url" content="https://soundofspace.group"> -->
+<meta name="twitter:title" content="SOUND AND SILENCE">
+<meta name="twitter:description" content="|SOUND AND SILENCE| is a touring exhibition that will take place at three galleries across England in 2025. The exhibition brings together four sculptors and bell makers who explore the function and fabrication of bells in different ways. The exhibition will feature sonic sculptures, installations, performances, workshops and live bronze casting - shining a light on the history, making processes, contemporary position and sculptural nature of bells. Alongside the exhibition we will produce a radio documentary about the project.">
+<!-- <meta name="twitter:image" content="https://ogcdn.net/6064b869-74ed-4eb9-b76c-0b701ffe7e6b/v4/soundofspace.group/%7CSOUND%20OF%20SPACE%7C/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2Fec88ac02-c727-4f60-bf5a-a63eec08bf9e.jpg%3Ftoken%3DwU-Ot_zvFqmyQ7_XYOZ94U2uDXKwYsHk9l7HI6NRGnk%26height%3D600%26width%3D1200%26expires%3D33256529538/og.png"> -->
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      font-family: "Raleway", sans-serif;
+    }
+
+    .bgimg {
+      background-image: url('BACKGROUND1.jpg');
+      min-height: 100%;
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      color: white;
+      z-index: 1; /* Ensure background image stays behind modals */
+    }
+
+    .w3-display-topright {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .w3-button {
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+
+    .w3-modal-content {
+      max-width: 600px;
+      margin: auto;
+      background-color: #fefefe;
+      position: relative;
+      text-align: center;
+      z-index: 2; /* Ensure modals appear above background */
+      padding: 0;
+    }
+
+    .w3-modal-content .w3-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: black;
+      color: white;
+      border: none;
+      font-size: 20px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .w3-container {
+      padding: 20px;
+    }
+
+    .w3-black-band {
+      background-color: #000;
+      color: white;
+      padding: 10px;
+    }
+
+    .image_gallery{
+    margin: 10px 50px;
+    }
+    .image_gallery img{
+        width: 430px;
+        padding: 5px;
+        filter: grayscale();
+        transition: 1s;
+    }
+
+    .image_gallery img:hover{
+        filter: grayscale(0);
+        transform: scale(1.1);
+    }
+
+    .single_image_display {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0,0,0,0.9);
+      }
+    .image_content {
+        margin: auto;
+        display: block;
+        max-width: 80%;
+        max-height: 80%;
+     }
+
+  </style>
+</head>
+<body>
+<link rel="icon" type="image/png" href="favicon.png" />
+<div class="bgimg w3-display-container" id="background">
+  <div class="w3-display-middle w3-xxxlarge">
+    <p><b>|SOUND AND SILENCE|</b></p>
+  </div>
+  <div class="w3-display-topleft w3-container w3-medium">
+    <p><button onclick="document.getElementById('information').style.display='block'" class="w3-button w3-black">INFORMATION</button></p>
+    <p><button onclick="document.getElementById('contact').style.display='block'" class="w3-button w3-black">CONTACT</button></p>
+    <p><button onclick="document.getElementById('exhibitions').style.display='block'" class="w3-button w3-black">EXHIBITIONS AND EVENTS</button></p>
+    <p><button onclick="document.getElementById('listen').style.display='block'" class="w3-button w3-black">LISTEN</button></p>
+    <p><button onclick="document.getElementById('images').style.display='block'" class="w3-button w3-black">IMAGES</button></p>
+  </div>
+  <div class="w3-display-bottomleft w3-container">
+    <p class="w3-small">Sound and Silence 2024/2025</p>
+  </div>
+</div>
+
+<!-- Information Modal -->
+<div id="information" class="w3-modal">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('information').style.display='none'">&times;</span>
+        <div class="w3-black-band">
+      <h1>INFORMATION</h1>
+    </div>
+    <div class="w3-container">
+      <h3><b>SOUND AND SILENCE</b></h3>
+      <p>|SOUND AND SILENCE| is a touring exhibition that will take place at three galleries across England in 2025. The exhibition brings together four sculptors and bell makers who explore the function and fabrication of bells in different ways. The exhibition will feature sonic sculptures, installations, performances, workshops and live bronze casting - shining a light on the history, making processes, contemporary position and sculptural nature of bells. Alongside the exhibition we will produce a radio documentary about the project.</p>
+      <h5>Copper Sounds</h5> 
+      <p>Short Bio</p>
+      <h5>Emma-Kate Matthews</h5> 
+      <p>Short Bio</p>
+      <h5>David Snoo Wilson</h5> 
+      <p>Short Bio</p>
+      <h5>Marcus Vergette</h5> 
+      <p>Short Bio</p>
+      <p></p>
+      <h5>More information</h5> 
+      <p><a href="https://www.coppersounds.co.uk/" target="_blank">COPPER SOUNDS</a></p>
+      <p><a href="https://ekm.works" target="_blank">EMMA-KATE</a></p>
+      <p><a href="https://oreandingot.com/about" target="_blank">DAVID SNOO WILSON</a></p>
+      <p><a href="https://en.wikipedia.org/wiki/Marcus_Vergette" target="_blank">MARCUS VERGETTE</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Contact Modal -->
+<div id="contact" class="w3-modal">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('contact').style.display='none'">&times;</span>
+    <div class="w3-black-band">
+      <h1>CONTACT</h1>
+    </div>
+    <div class="w3-container">
+      <h3><b>CONTACT US:</b></h3>
+      <p><a href="mailto:soundandsilenceweb@gmail.com?subject=Hello">Email</a></p>
+      <h3><b>FOLLOW US:</b></h3>
+      <p><a href="https://www.coppersounds.co.uk/" target="_blank">COPPER SOUNDS</a></p>
+      <p><a href="https://ekm.works" target="_blank">EMMA-KATE</a></p>
+      <p><a href="https://oreandingot.com/about" target="_blank">DAVID SNOO WILSON</a></p>
+      <p><a href="https://en.wikipedia.org/wiki/Marcus_Vergette" target="_blank">MARCUS VERGETTE</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- Exhibitions Modal -->
+<div id="exhibitions" class="w3-modal">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('exhibitions').style.display='none'">&times;</span>
+    <div class="w3-black-band">
+      <h1>EXHIBITIONS AND EVENTS</h1>
+    </div>
+    <div class="w3-container">
+      <h3><b>|SOUND AND SILENCE ON TOUR|</b></h3>
+      <h5>Make Southwest, Devon</h5> 
+      <p><i>22 March – 14 June 2025</i></p>
+      <p>This exhibition in MAKE Southwest's Jubilee Gallery and outdoor courtyard will show the history, making processes, contemporary position and sculptural nature of bells. It brings together 4 sculptors and bellmakers exploring the function and fabrication of bells - Marcus Vergette, sculptor, musician, and bellmaker; Copper Sounds, artist duo exploring 3D digital design and bronze casting; David Snoo Wilson, travelling founder and sculptor, and Emma-Kate Matthews, architect, composer, musician, and digital artist. The exhibition features sonic sculptures, installations, films, performances, workshops and live casting. It will examine and explain the history and impact, past, present and future, of bell making and bell ringing in an exhibition that will be informative, fun and accessible for all ages, and feature plenty of events and chances to make some noise!</p>
+      <p><a href="https://makesouthwest.org.uk/all-activity/makingit25-4yd95" target="_blank">INFORMATION AND BOOKING</a></p>
+
+      <h5>Cross Lane Projects, Kendal</h5> 
+      <p><i>TBC</i></p>
+      <p>Details to follow</p>
+      <p><a href="https://www.crosslaneprojects.com/kendal-cumbria/" target="_blank">INFORMATION AND BOOKING</a></p>
+
+      <h5>Helisev linnamüür Festival, Tallinn, Estonia</h5> 
+      <p><i>TBC</i></p>
+      <p>Details to follow</p>
+      <p><a href="https://www.facebook.com/p/Helisev-linnam%C3%BC%C3%BCr-100064142734502/" target="_blank">INFORMATION AND BOOKING</a></p>
+
+    </div>
+  </div>
+</div>
+
+<!-- Listen Modal -->
+<div id="listen" class="w3-modal">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('listen').style.display='none'">&times;</span>
+    <div class="w3-black-band">
+      <h1>LISTEN</h1>
+    </div>
+    <div class="w3-container">
+      <h3><b>|WORK FEATURING SOUND AND SILENCE|</b></h3>
+
+      <h5>Perfect Cyan Bright Square by Emma-Kate Matthews</h5> 
+      <p>Perfect cyan Bright Square presents a sonic amalgam of ‘bell-ish’ instruments designed and made by Emma-Kate, which she calls 'Resonant Bodies'. Each sound is recorded using binaural and ambisonic microphones, helping to create a range of perspectival shifts that oscillate between slow-evolving background drones and shimmering foreground details. The resultant sound is ‘music-ish’, playing with loose rhythmic, harmonic, and tonal logics that fall in and out of order.</p>
+      <p><iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7m3bnzPcbArn5gRmP8NlCb?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+
+      <h5>Sequenced Ceramics by Copper Sounds</h5> 
+      <p>A unique take on deconstructed club / ambient music, the intimate and immersive sounds on ‘Sequenced Ceramics’ were made using seven purpose-built ceramic vessels, played using a custom made sequencer and mechanical beaters. The album is released as a limited edition of 50 ceramic vessels, each one unique, and glazed with a download code. This ceramic is also an instrument, its shape based on one of the seven ceramics used on the album.</p>
+      <p><iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/0sa3IMfWcRPLrhvO3c1cce?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+
+      <h5>Tintinnabulation by Marcus Vergette</h5> 
+      <p>At the centre of this release are Vergette’s Time and Tide bells: handmade instruments which create sound with the rising sea levels. One of the bells is ringing at any given time of day as the tide wraps around our coast, retreats and returns again. There are eight bells currently scattered across the UK’s coasts, each existing as a democratic artwork owned by the local community.</p>
+      <p><iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/020MRcNgiByDigp817w4jq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe></p>
+
+      <h5>David Snoo Wilson</h5> 
+      <p>Info here</p>
+      <p><iframe width="560" height="315" src="https://www.youtube.com/embed/B2gcld-avEQ?si=KxZjTH9WwEygSmMx&amp;start=4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>
+    </div>
+  </div>
+</div>
+
+<!-- Images Modal -->
+<div id="images" class="w3-modal">
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('images').style.display='none'">&times;</span>
+    <div class="w3-black-band">
+      <h1>IMAGES</h1>
+    </div>
+    <div class="w3-container">
+      <p>Need to add some information for each one</p>
+  <article class="image_gallery">
+  <img src="image1.jpg" alt="image 1" />
+  <img src="image2.jpg" alt="image 2" />
+  <img src="image3.jpg" alt="image 3" />
+  <img src="image4.jpg" alt="image 4" />
+  <img src="image5.jpg" alt="image 5" />
+  <img src="image6.jpg" alt="image 6" />
+  <img src="image7.jpg" alt="image 7" />
+  <img src="image8.jpg" alt="image 8" />
+</article>
+    </div>
+  </div>
+</div>
+
+<!-- JavaScript for modals -->
+<script>
+  // Close modals when clicking outside of them
+  window.onclick = function(event) {
+    var modals = document.getElementsByClassName('w3-modal');
+    for (var i = 0; i < modals.length; i++) {
+      if (event.target == modals[i]) {
+        modals[i].style.display = "none";
+      }
+    }
+  }
+
+  // Close modals with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      var modals = document.getElementsByClassName('w3-modal');
+      for (var i = 0; i < modals.length; i++) {
+        if (modals[i].style.display === "block") {
+          modals[i].style.display = "none";
+        }
+      }
+    }
+  });
+</script>
+
+</body>
+</html>
