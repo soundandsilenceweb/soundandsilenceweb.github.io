@@ -19,10 +19,11 @@
     #menu button {
       background-color: #555;
       border: none;
-      padding: 5px;
+      padding: 10px;
       margin: 5px;
       color: white;
       cursor: pointer;
+      font-size: 14px;
     }
     #menu button:hover {
       background-color: #777;
@@ -32,9 +33,9 @@
 <body>
   <!-- Menu for controls -->
   <div id="menu">
-    <button id="zoomInBtn">Zoom In</button>
-    <button id="zoomOutBtn">Zoom Out</button>
-    <button id="resetViewBtn">Reset View</button>
+    <button id="zoomInBtn">+</button>
+    <button id="zoomOutBtn">-</button>
+    <button id="resetViewBtn">↺ Reset View</button>
   </div>
 
   <!-- Load Three.js from CDN -->
@@ -48,6 +49,7 @@
     let scene, camera, renderer, model, controls;
     let modelBoundingBox;
     let initialCameraPosition = new THREE.Vector3(0, 0, 5);
+    let initialCameraRotation = new THREE.Euler(0, 0, 0); // Keep track of initial rotation
 
     function init() {
       // Set up the scene
@@ -56,6 +58,7 @@
       // Set up the camera
       camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
       camera.position.copy(initialCameraPosition);  // Set camera distance from the object
+      camera.rotation.copy(initialCameraRotation);  // Set initial rotation
 
       // Set up the renderer
       renderer = new THREE.WebGLRenderer();
@@ -148,9 +151,10 @@
       camera.updateProjectionMatrix();
     }
 
-    // Reset camera to initial position
+    // Reset camera to initial position and rotation
     function resetView() {
       camera.position.copy(initialCameraPosition);
+      camera.rotation.copy(initialCameraRotation);
       camera.updateProjectionMatrix();
     }
 
