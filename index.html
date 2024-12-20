@@ -29,12 +29,14 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
   <style>
+/* General body and html styles */
     body, html {
       height: 100%;
       margin: 0;
       font-family: "Raleway", sans-serif;
     }
 
+    /* Background image */
     .bgimg {
       background-image: url('BACKGROUND1.jpg');
       min-height: 100%;
@@ -45,27 +47,31 @@
       z-index: 1; /* Ensure background image stays behind modals */
     }
 
+    /* Positioning for top-right button */
     .w3-display-topright {
       position: absolute;
       top: 10px;
       right: 10px;
     }
 
+    /* Button styles */
     .w3-button {
-      padding: 5px 5px;
+      padding: 5px;
       font-size: 16px;
     }
 
+    /* Modal content */
     .w3-modal-content {
       max-width: 70%;
       margin: auto;
       background-color: #fefefe;
-      position: relative;
       text-align: center;
-      z-index: 2; /* Ensure modals appear above background */
+      position: relative;
       padding: 0;
+      z-index: 2; /* Ensure modals appear above background */
     }
 
+    /* Close button in modal */
     .w3-modal-content .w3-button {
       position: absolute;
       top: 10px;
@@ -78,48 +84,71 @@
       cursor: pointer;
     }
 
+    /* Container padding */
     .w3-container {
       padding: 20px;
     }
 
+    /* Black band style */
     .w3-black-band {
       background-color: #000;
       color: white;
       padding: 10px;
     }
 
-    .image_gallery{
-    margin: 10px 10px;
-    }
-    .image_gallery img{
-        width: 90%;
-        padding: 5px;
-        filter: grayscale();
-        transition: 0.5s;
-    }
-
-    .image_gallery img:hover{
-        filter: grayscale(0);
-        transform: scale(1.1);
+    /* Image gallery styles */
+    /* Center the images in the gallery */
+    .image_gallery {
+      margin: 10px;
+      position: relative;
+      display: flex; /* Use flexbox to center images */
+      justify-content: center;
+      align-items: center;
     }
 
-    .single_image_display {
-        display: none;
-        position: center;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0,0,0,0.9);
-      }
-    .image_content {
-        margin: auto;
-        display: block;
-        max-width: 80%;
-        max-height: 80%;
-     }
+    .image_gallery img {
+      width: 90%;
+/*      max-width: 400px; /* Set a maximum width for image size */*/
+      padding: 5px;
+/*      filter: grayscale();*/
+      transition: transform 0.5s, filter 0.5s;
+      display: block;
+      object-fit: contain; /* Ensures the image fits within the container */
+    }
+
+    /* Text Box/Overlay Styles */
+    .image_gallery .overlay {
+      position: absolute;
+      bottom: 5%;
+      left: 50%; 
+      transform: translateX(-50%); /* Adjust to perfectly center the overlay */
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      display: inline-block;
+      padding: 10px;
+      opacity: 0; /* Hidden by default */
+      transition: opacity 0.3s ease-in-out;
+      z-index: 1;
+      max-width: 80%;
+    }
+
+    .overlay-text {
+      font-family: "Raleway", sans-serif; /* Change font style */
+      font-size: 10pt;
+      font-weight: normal;
+      text-align: center; /* Center the text horizontally */
+    }
+
+    .image_gallery:hover .overlay {
+      opacity: 1; /* Show the overlay when the image is hovered */
+    }
+
+    /* Hover effects for the images */
+    .image_gallery img:hover {
+      filter: grayscale(100);
+      transform: scale(1.1);
+    }
+
 
   </style>
 </head>
@@ -135,6 +164,7 @@
     <p><button onclick="document.getElementById('exhibitions').style.display='block'" class="w3-button w3-black">EXHIBITIONS AND EVENTS</button></p>
     <p><button onclick="document.getElementById('listen').style.display='block'" class="w3-button w3-black">LISTEN</button></p>
     <p><button onclick="document.getElementById('images').style.display='block'" class="w3-button w3-black">IMAGES</button></p>
+    <p><button onclick="document.getElementById('3D').style.display='block'" class="w3-button w3-black">3D</button></p>
   </div>
   <div class="w3-display-bottomleft w3-container">
     <p class="w3-small">Sound and Silence 2024/2025</p>
@@ -253,25 +283,301 @@
       <h1>IMAGES</h1>
     </div>
     <div class="w3-container">
-      <p>Images from Copper Sounds, Emma-Kate Matthews, David Snoo Wilson, Marcus Vergette</p>
-  <article class="image_gallery">
-  <img src="image1.jpg" alt="image 1" />
-  <img src="image2.jpg" alt="image 2" />
-  <img src="image3.jpg" alt="image 3" />
-  <img src="image4.jpg" alt="image 4" />
-  <img src="image13.jpg" alt="image 13" />
-  <img src="image5.jpg" alt="image 5" />
-  <img src="image6.jpg" alt="image 6" />
-  <img src="image7.jpg" alt="image 7" />
-  <img src="image8.jpg" alt="image 8" />
-  <img src="image9.jpg" alt="image 9" />
-  <img src="image10.jpg" alt="image 10" />
-  <img src="image11.jpg" alt="image 11" />
-  <img src="image12.jpg" alt="image 12" />
-</article>
+      <p> </p>
+      <!-- Images Gallery -->
+       <div class="image_gallery">
+        <img src="image1.jpg" alt="Image 1">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Sonic Bronze</span>          
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image2.jpg" alt="Image 2">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Sonic Bronze</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image3.jpg" alt="Image 3">
+        <div class="overlay">
+          <span class="overlay-text">Emma-Kate Matthews, Resonant Bodies</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image13.jpg" alt="Image 13">
+        <div class="overlay">
+          <span class="overlay-text">Emma-Kate Matthews, Resonant Bodies</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image4.jpg" alt="Image 4">
+        <div class="overlay">
+          <span class="overlay-text">Emma-Kate Matthews, Resonant Bodies</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image5.jpg" alt="Image 5">
+        <div class="overlay">
+          <span class="overlay-text">David Snoo Wilson, A bell for the Prince of Wales 70th Birthday</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image6.jpg" alt="Image 6">
+        <div class="overlay">
+          <span class="overlay-text">David Snoo Wilson, Tide bell</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image7.jpg" alt="Image 7">
+        <div class="overlay">
+          <span class="overlay-text">Marcus Vergette, Time and tide bell</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image8.jpg" alt="Image 8">
+        <div class="overlay">
+          <span class="overlay-text">Marcus Vergette, Time and tide bell</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image9.jpg" alt="Image 9">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Strange brew</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image10.jpg" alt="Image 2">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Strange brew</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image11.jpg" alt="Image 2">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Strange brew</span>       
+        </div>
+      </div>
+
+      <div class="image_gallery">
+        <img src="image12.jpg" alt="Image 2">
+        <div class="overlay">
+          <span class="overlay-text">Copper Sounds, Strange brew</span>       
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
+
+<!-- 3D Modal -->
+<div id="3D" class="w3-modal">
+    <div class="w3-modal-content">
+        <span class="w3-button w3-display-topright" onclick="document.getElementById('3D').style.display='none'">×</span>
+        <div class="w3-black-band">
+            <h1>3D</h1>
+        </div>
+        <!-- Loading indicator -->
+        <div id="loading-indicator" style="display: none; text-align: center; padding: 20px;">
+            Loading 3D model...
+        </div>
+        <!-- Controls -->
+        <div id="menu" style="padding: 10px; text-align: center;">
+            <button id="zoomInBtn">+</button>
+            <button id="zoomOutBtn">-</button>
+            <button id="resetViewBtn">↺ Reset View</button>
+        </div>
+    </div>
+</div>
+
+<!-- Separate container for Three.js canvas -->
+<div id="modal-content" style="width: 100%; height: 500px; position: relative;"></div>
+
+<style>
+#menu button {
+    margin: 5px;
+    padding: 5px 10px;
+    background: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#loading-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1000;
+}
+</style>
+
+<script>
+let scene, camera, renderer, model, controls;
+let modelBoundingBox;
+let initialCameraPosition = new THREE.Vector3(0, 0, 5);
+let initialCameraRotation = new THREE.Euler(0, 0, 0);
+let isSceneInitialized = false;
+
+// Initialize scene when 3D modal is opened
+document.getElementById('3D').addEventListener('click', () => {
+    document.getElementById('3D').style.display = 'block';
+    if (!isSceneInitialized) {
+        initialize3DScene();
+    }
+});
+
+function initialize3DScene() {
+    const modalContent = document.getElementById('modal-content');
+    if (!modalContent) return;
+
+    const loadingIndicator = document.getElementById('loading-indicator');
+    loadingIndicator.style.display = 'block';
+
+    // Scene setup
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(75, modalContent.clientWidth / modalContent.clientHeight, 0.1, 1000);
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(modalContent.clientWidth, modalContent.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    modalContent.appendChild(renderer.domElement);
+
+    // Lighting
+    const light = new THREE.DirectionalLight(0xffffff, 1);
+    light.position.set(5, 10, 7.5);
+    scene.add(light);
+
+    const ambientLight = new THREE.AmbientLight(0x404040, 0.7);
+    scene.add(ambientLight);
+
+    // Controls
+    controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.25;
+    controls.screenSpacePanning = false;
+
+    // Load model
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+        'untitled.glb',
+        function (gltf) {
+            loadingIndicator.style.display = 'none';
+            model = gltf.scene;
+
+            const copperMaterial = new THREE.MeshStandardMaterial({
+                color: 0xbcb484,
+                metalness: 0.8,
+                roughness: 0.2,
+            });
+
+            model.traverse(function(child) {
+                if (child.isMesh) {
+                    child.material = copperMaterial;
+                }
+            });
+
+            scene.add(model);
+            modelBoundingBox = new THREE.Box3().setFromObject(model);
+            centerAndZoomModel();
+            isSceneInitialized = true;
+        },
+        // Progress callback
+        function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+        },
+        // Error callback
+        function (error) {
+            console.error('Error loading model:', error);
+            loadingIndicator.textContent = 'Error loading 3D model';
+            loadingIndicator.style.display = 'block';
+        }
+    );
+
+    // Camera initial position
+    camera.position.set(0, 2, 5);
+    camera.lookAt(0, 0, 0);
+
+    // Controls
+    document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
+    document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
+    document.getElementById('resetViewBtn').addEventListener('click', resetView);
+
+    // Start animation loop
+    animate();
+}
+
+function centerAndZoomModel() {
+    if (!model || !modelBoundingBox) return;
+    
+    const center = modelBoundingBox.getCenter(new THREE.Vector3());
+    model.position.sub(center);
+    
+    const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
+    const cameraDistance = size * 1.5;
+    camera.position.z = cameraDistance;
+    camera.updateProjectionMatrix();
+}
+
+function zoomIn() {
+    camera.position.z -= 1;
+    camera.updateProjectionMatrix();
+}
+
+function zoomOut() {
+    camera.position.z += 1;
+    camera.updateProjectionMatrix();
+}
+
+function resetView() {
+    camera.position.copy(initialCameraPosition);
+    camera.rotation.copy(initialCameraRotation);
+    camera.updateProjectionMatrix();
+    controls.reset();
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    if (controls) controls.update();
+    if (renderer && scene && camera) {
+        renderer.render(scene, camera);
+    }
+}
+
+// Handle window resize
+window.addEventListener('resize', onWindowResize, false);
+
+function onWindowResize() {
+    if (camera && renderer && modalContent) {
+        camera.aspect = modalContent.clientWidth / modalContent.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(modalContent.clientWidth, modalContent.clientHeight);
+    }
+}
+
+// Cleanup when modal is closed
+document.querySelector('#3D .w3-display-topright').addEventListener('click', () => {
+    if (renderer) {
+        renderer.dispose();
+        scene.dispose();
+        isSceneInitialized = false;
+    }
+});
+</script>
+
 
 <!-- JavaScript for modals -->
 <script>
@@ -297,6 +603,9 @@
     }
   });
 </script>
+
+
+
 
 </body>
 </html>
