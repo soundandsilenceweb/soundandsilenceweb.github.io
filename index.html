@@ -478,7 +478,7 @@
 
           // Load GLTF model
           const loader = new GLTFLoader();
-          loader.load('untitled.glb', function (gltf) {
+          loader.load('./untitled.glb', function (gltf) {
             console.log('Model loaded successfully');
             model = gltf.scene;
             scene.add(model);
