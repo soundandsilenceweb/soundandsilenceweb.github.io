@@ -407,11 +407,11 @@
         <div class="w3-black-band">
             <h1>3D</h1>
         </div>
-        <p>Coming soon!</p>
         <!-- Loading indicator -->
-        <div id="loading-indicator" style="display: none; text-align: center; padding: 20px;">
+        <div id="loading-indicator" style="text-align: center; padding: 20px;">
             Loading 3D model...
         </div>
+        <p> Coming soon..! </p>
         <!-- Controls -->
         <div id="menu" style="padding: 10px; text-align: center;">
             <button id="zoomInBtn">+</button>
@@ -429,6 +429,7 @@
             // Modal functionality
             const modal = document.getElementById('3D');
             const modalContent = document.getElementById('modal-content');
+            const loadingIndicator = document.getElementById('loading-indicator');
             let scene, camera, renderer, model, controls;
             let modelBoundingBox;
 
@@ -444,6 +445,9 @@
 
             // Initialize 3D scene
             function initialize3DScene() {
+                // Show loading indicator
+                loadingIndicator.style.display = 'block';
+
                 // Scene, Camera, Renderer
                 scene = new THREE.Scene();
                 camera = new THREE.PerspectiveCamera(75, modalContent.clientWidth / modalContent.clientHeight, 0.1, 1000);
@@ -481,9 +485,14 @@
                     modelBoundingBox = new THREE.Box3().setFromObject(model);
                     centerAndZoomModel();
 
+                    // Hide loading indicator
+                    loadingIndicator.style.display = 'none';
+
                     render();
                 }, undefined, function (error) {
                     console.error(error);
+                    // Hide loading indicator and show error message
+                    loadingIndicator.innerHTML = 'Failed to load 3D model.';
                 });
 
                 // Basic UI Controls
