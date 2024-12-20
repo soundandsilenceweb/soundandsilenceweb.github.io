@@ -589,14 +589,30 @@
         </script>
     </div>
 </div>
+<!-- JavaScript for modals -->
+<script>
+  // Close modals when clicking outside of them
+  window.onclick = function(event) {
+    var modals = document.getElementsByClassName('w3-modal');
+    for (var i = 0; i < modals.length; i++) {
+      if (event.target == modals[i]) {
+        modals[i].style.display = "none";
+      }
+    }
+  }
 
-
-
-
-<!-- Load Three.js dependencies -->
-
-
-
+  // Close modals with Escape key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+      var modals = document.getElementsByClassName('w3-modal');
+      for (var i = 0; i < modals.length; i++) {
+        if (modals[i].style.display === "block") {
+          modals[i].style.display = "none";
+        }
+      }
+    }
+  });
+</script>
 
 </body>
 </html>
