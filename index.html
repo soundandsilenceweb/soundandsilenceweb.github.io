@@ -402,8 +402,8 @@
 
 <!-- 3D Modal -->
 <div id="3D" class="w3-modal" style="display: none;">
-    <div class="w3-modal-content" style="position: relative; width: 100%; height: 100%; overflow: hidden;">
-        <span class="w3-button w3-display-topright" onclick="closeModal()">×</span>
+  <div class="w3-modal-content">
+    <span class="w3-button w3-display-topright" onclick="document.getElementById('3D').style.display='none'">&times;</span>
         <div class="w3-black-band">
             <h1>3D</h1>
         </div>
@@ -411,7 +411,6 @@
         <div id="loading-indicator" style="text-align: center; padding: 20px;">
             Loading 3D model...
         </div>
-        <p> Coming soon..! </p>
         <!-- Controls -->
         <div id="menu" style="padding: 10px; text-align: center;">
             <button id="zoomInBtn">+</button>
@@ -419,13 +418,13 @@
             <button id="resetViewBtn">↺ Reset View</button>
         </div>
         <!-- Three.js container inside modal -->
-        <div id="modal-content" style="width: 100%; height: 400px; position: relative; background-color: #f0f0f0;"></div>
+        <div id="modal-content" style="width: 100%; height: 400px; position: relative; background-color: black;"></div>
 
-        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+        <script type="module">
+            import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js';
+            import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js';
+            import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js';
 
-        <script>
             // Modal functionality
             const modal = document.getElementById('3D');
             const modalContent = document.getElementById('modal-content');
@@ -454,10 +453,11 @@
                 renderer = new THREE.WebGLRenderer({ antialias: true });
                 renderer.setSize(modalContent.clientWidth, modalContent.clientHeight);
                 renderer.setPixelRatio(window.devicePixelRatio);
+                renderer.setClearColor(0x000000, 1); // Set the background color to black
                 modalContent.appendChild(renderer.domElement);
 
                 // Orbit Controls
-                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls = new OrbitControls(camera, renderer.domElement);
                 controls.enableDamping = true;
                 controls.dampingFactor = 0.25;
                 controls.screenSpacePanning = false;
@@ -475,7 +475,7 @@
                 camera.lookAt(0, 0, 0);
 
                 // Load GLTF model
-                const loader = new THREE.GLTFLoader();
+                const loader = new GLTFLoader();
                 loader.load('untitled.glb', function (gltf) {
                     model = gltf.scene;
                     scene.add(model);
@@ -560,6 +560,9 @@
                     }
                 }
             });
+
+            // Expose openModal function to the global scope
+            window.openModal = openModal;
         </script>
     </div>
 </div>
