@@ -400,172 +400,174 @@
   </div>
 </div>
 
-<!-- 3D Modal -->
-<div id="3D" class="w3-modal" style="display: none;">
-  <div class="w3-modal-content">
-    <span class="w3-button w3-display-topright" onclick="document.getElementById('3D').style.display='none'">&times;</span>
-        <div class="w3-black-band">
-            <h1>3D</h1>
-        </div>
-        <!-- Loading indicator -->
-        <div id="loading-indicator" style="text-align: center; padding: 20px;">
-            Loading 3D model...
-        </div>
-        <!-- Controls -->
-        <div id="menu" style="padding: 10px; text-align: center;">
-            <button id="zoomInBtn">+</button>
-            <button id="zoomOutBtn">-</button>
-            <button id="resetViewBtn">↺ Reset View</button>
-        </div>
-        <!-- Three.js container inside modal -->
-        <div id="modal-content" style="width: 100%; height: 400px; position: relative; background-color: black;"></div>
 
-        <script type="module">
-            import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.module.js';
-            import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/controls/OrbitControls.js';
-            import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.128.0/examples/jsm/loaders/GLTFLoader.js';
+  <!-- 3D Modal -->
+  <div id="3D" class="w3-modal" style="display: none;">
+    <div class="w3-modal-content">
+      <span class="w3-button w3-display-topright" onclick="document.getElementById('3D').style.display='none'">&times;</span>
+          <div class="w3-black-band">
+              <h1>3D</h1>
+      </div>
+      <!-- Loading indicator -->
+      <div id="loading-indicator" style="text-align: center; padding: 20px;">
+        Coming soon..!
+      </div>
+      <!-- Controls -->
+      <div id="menu" style="padding: 10px; text-align: center;">
+        <button id="zoomInBtn">+</button>
+        <button id="zoomOutBtn">-</button>
+        <button id="resetViewBtn">↺ Reset View</button>
+      </div>
+      <!-- Three.js container inside modal -->
+      <div id="modal-content" style="width: 100%; height: 400px; position: relative; background-color: black;"></div>
+      
+      <script type="module">
+        import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.152.0/build/three.module.js';
+        import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.152.0/examples/jsm/controls/OrbitControls.js';
+        import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.152.0/examples/jsm/loaders/GLTFLoader.js';
 
-            // Modal functionality
-            const modal = document.getElementById('3D');
-            const modalContent = document.getElementById('modal-content');
-            const loadingIndicator = document.getElementById('loading-indicator');
-            let scene, camera, renderer, model, controls;
-            let modelBoundingBox;
+        // Modal functionality
+        const modal = document.getElementById('3D');
+        const modalContent = document.getElementById('modal-content');
+        const loadingIndicator = document.getElementById('loading-indicator');
+        let scene, camera, renderer, model, controls;
+        let modelBoundingBox;
 
-            function openModal() {
-                modal.style.display = 'block';
-                initialize3DScene();
+        // Ensure closeModal is defined in the global scope
+        window.closeModal = function() {
+          modal.style.display = 'none';
+          clear3DScene();
+        }
+
+        window.openModal = function() {
+          modal.style.display = 'block';
+          initialize3DScene();
+        }
+
+        // Initialize 3D scene
+        function initialize3DScene() {
+          // Show loading indicator
+          loadingIndicator.style.display = 'block';
+
+          // Scene, Camera, Renderer
+          scene = new THREE.Scene();
+          camera = new THREE.PerspectiveCamera(75, modalContent.clientWidth / modalContent.clientHeight, 0.1, 1000);
+          renderer = new THREE.WebGLRenderer({ antialias: true });
+          renderer.setSize(modalContent.clientWidth, modalContent.clientHeight);
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setClearColor(0x000000, 1); // Set the background color to black
+          modalContent.appendChild(renderer.domElement);
+
+          // Orbit Controls
+          controls = new OrbitControls(camera, renderer.domElement);
+          controls.enableDamping = true;
+          controls.dampingFactor = 0.25;
+          controls.screenSpacePanning = false;
+
+          // Lighting
+          const light = new THREE.DirectionalLight(0xffffff, 1);
+          light.position.set(5, 10, 7.5);
+          scene.add(light);
+
+          const ambientLight = new THREE.AmbientLight(0x404040, 0.7);
+          scene.add(ambientLight);
+
+          // Camera position
+          camera.position.set(0, 2, 5);
+          camera.lookAt(0, 0, 0);
+
+          // Load GLTF model
+          const loader = new GLTFLoader();
+          loader.load('untitled.glb', function (gltf) {
+            console.log('Model loaded successfully');
+            model = gltf.scene;
+            scene.add(model);
+            model.position.set(0, 0, 0); // Center model in the scene
+
+            // Compute the bounding box of the model to adjust camera position
+            modelBoundingBox = new THREE.Box3().setFromObject(model);
+            centerAndZoomModel();
+
+            // Hide loading indicator
+            loadingIndicator.style.display = 'none';
+
+            render();
+          }, function (xhr) {
+            console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+          }, function (error) {
+            console.error('An error occurred while loading the model:', error);
+            // Hide loading indicator and show error message
+            loadingIndicator.innerHTML = 'Failed to load 3D model.';
+          });
+
+          // Basic UI Controls
+          document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
+          document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
+          document.getElementById('resetViewBtn').addEventListener('click', resetView);
+        }
+
+        function centerAndZoomModel() {
+          const center = modelBoundingBox.getCenter(new THREE.Vector3());
+          model.position.sub(center);  // Center the model in the world space
+
+          const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
+          const cameraDistance = size * 1.5;
+
+          camera.position.z = cameraDistance;
+          camera.updateProjectionMatrix();
+        }
+
+        function zoomIn() {
+          camera.position.z -= 1;
+          camera.updateProjectionMatrix();
+        }
+
+        function zoomOut() {
+          camera.position.z += 1;
+          camera.updateProjectionMatrix();
+        }
+
+        function resetView() {
+          camera.position.set(0, 2, 5);
+          camera.lookAt(0, 0, 0);
+          camera.updateProjectionMatrix();
+        }
+
+        function render() {
+          requestAnimationFrame(render);
+          controls.update(); // Update the controls
+          renderer.render(scene, camera);
+        }
+
+        // Clear the scene when the modal is closed
+        function clear3DScene() {
+          if (renderer) {
+            renderer.dispose();
+          }
+          if (scene) {
+            scene.dispose();
+          }
+          modalContent.innerHTML = ''; // Remove renderer DOM element
+        }
+
+        // Close modals when clicking outside of them
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            closeModal();
+          }
+        }
+
+        // Close modals with Escape key
+        document.addEventListener('keydown', function(event) {
+          if (event.key === 'Escape') {
+            if (modal.style.display === "block") {
+              closeModal();
             }
-
-            function closeModal() {
-                modal.style.display = 'none';
-                clear3DScene();
-            }
-
-            // Initialize 3D scene
-            function initialize3DScene() {
-                // Show loading indicator
-                loadingIndicator.style.display = 'block';
-
-                // Scene, Camera, Renderer
-                scene = new THREE.Scene();
-                camera = new THREE.PerspectiveCamera(75, modalContent.clientWidth / modalContent.clientHeight, 0.1, 1000);
-                renderer = new THREE.WebGLRenderer({ antialias: true });
-                renderer.setSize(modalContent.clientWidth, modalContent.clientHeight);
-                renderer.setPixelRatio(window.devicePixelRatio);
-                renderer.setClearColor(0x000000, 1); // Set the background color to black
-                modalContent.appendChild(renderer.domElement);
-
-                // Orbit Controls
-                controls = new OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.25;
-                controls.screenSpacePanning = false;
-
-                // Lighting
-                const light = new THREE.DirectionalLight(0xffffff, 1);
-                light.position.set(5, 10, 7.5);
-                scene.add(light);
-
-                const ambientLight = new THREE.AmbientLight(0x404040, 0.7);
-                scene.add(ambientLight);
-
-                // Camera position
-                camera.position.set(0, 2, 5);
-                camera.lookAt(0, 0, 0);
-
-                // Load GLTF model
-                const loader = new GLTFLoader();
-                loader.load('untitled.glb', function (gltf) {
-                    model = gltf.scene;
-                    scene.add(model);
-                    model.position.set(0, 0, 0); // Center model in the scene
-
-                    // Compute the bounding box of the model to adjust camera position
-                    modelBoundingBox = new THREE.Box3().setFromObject(model);
-                    centerAndZoomModel();
-
-                    // Hide loading indicator
-                    loadingIndicator.style.display = 'none';
-
-                    render();
-                }, undefined, function (error) {
-                    console.error(error);
-                    // Hide loading indicator and show error message
-                    loadingIndicator.innerHTML = 'Failed to load 3D model.';
-                });
-
-                // Basic UI Controls
-                document.getElementById('zoomInBtn').addEventListener('click', zoomIn);
-                document.getElementById('zoomOutBtn').addEventListener('click', zoomOut);
-                document.getElementById('resetViewBtn').addEventListener('click', resetView);
-            }
-
-            function centerAndZoomModel() {
-                const center = modelBoundingBox.getCenter(new THREE.Vector3());
-                model.position.sub(center);  // Center the model in the world space
-
-                const size = modelBoundingBox.getSize(new THREE.Vector3()).length();
-                const cameraDistance = size * 1.5;
-
-                camera.position.z = cameraDistance;
-                camera.updateProjectionMatrix();
-            }
-
-            function zoomIn() {
-                camera.position.z -= 1;
-                camera.updateProjectionMatrix();
-            }
-
-            function zoomOut() {
-                camera.position.z += 1;
-                camera.updateProjectionMatrix();
-            }
-
-            function resetView() {
-                camera.position.set(0, 2, 5);
-                camera.lookAt(0, 0, 0);
-                camera.updateProjectionMatrix();
-            }
-
-            function render() {
-                requestAnimationFrame(render);
-                controls.update(); // Update the controls
-                renderer.render(scene, camera);
-            }
-
-            // Clear the scene when the modal is closed
-            function clear3DScene() {
-                if (renderer) {
-                    renderer.dispose();
-                }
-                if (scene) {
-                    scene.dispose();
-                }
-                modalContent.innerHTML = ''; // Remove renderer DOM element
-            }
-
-            // Close modals when clicking outside of them
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    closeModal();
-                }
-            }
-
-            // Close modals with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape') {
-                    if (modal.style.display === "block") {
-                        closeModal();
-                    }
-                }
-            });
-
-            // Expose openModal function to the global scope
-            window.openModal = openModal;
-        </script>
+          }
+        });
+      </script>
     </div>
-</div>
+  </div>
 
 <!-- JavaScript for modals -->
 <script>
